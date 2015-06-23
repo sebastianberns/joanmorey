@@ -27,12 +27,14 @@ var jm = {
       
       // Pause on mousewheel
       var mousewheelThrottle = eina.throttle( jm.manifesto.pause, 300, { trailing: false })
-      bean.on( jm.manifesto.m, 'DOMMouseScroll', mousewheelThrottle, false )  // Firefox
-      bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )      // all others
+      bean.on( jm.manifesto.m, 'DOMMouseScroll', mousewheelThrottle, false ) // Firefox
+      bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )     // all others
+      bean.on( jm.manifesto.m, 'touchmove', jm.manifesto.pause, false )      // Touch
       // Resume after timeout
       var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.scroll.next )
-      bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )  // Firefox
-      bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )      // all others
+      bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
+      bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )          // all others
+      bean.on( jm.manifesto.m, 'touchmove', scrollTimeout, false )           // Touch  
     },
     
     setup: function()
