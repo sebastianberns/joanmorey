@@ -7,6 +7,10 @@ var jm = {
   
   manifesto: {
     
+    scroll: {
+      speed: 100,
+      easing: 'easeOutCubic'
+    },
     m: document.getElementById('manifesto'),
     a: document.querySelectorAll('#manifesto article'),
     o: {},
@@ -49,7 +53,7 @@ var jm = {
     {
       jm.manifesto.s = setInterval(function(){
         var n = '#'+ jm.manifesto.get.next().id
-        smoothScroll.animateScroll( null, n, { speed: 200, easing: 'easeOutCubic' })
+        smoothScroll.animateScroll( null, n, { speed: jm.manifesto.scroll.speed, easing: jm.manifesto.scroll.easing })
       }, 2000)
     },
     
