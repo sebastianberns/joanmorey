@@ -3,22 +3,6 @@ var jm = {
   init: function()
   {
     jm.manifesto.init()
-    
-    var mousewheelThrottle = eina.throttle( jm.events.mousewheel, 300, { trailing: false })
-    bean.on( jm.manifesto.m, 'DOMMouseScroll', mousewheelThrottle, false )  // Firefox
-    bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )      // all others
-    var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.scroll.next )
-    bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )  // Firefox
-    bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )      // all others
-  },
-  
-  events: {
-    
-    mousewheel: function( _e )
-    {
-      jm.manifesto.pause()
-    }
-    
   },
   
   manifesto: {
@@ -36,6 +20,25 @@ var jm = {
     
     init: function()
     {
+      jm.manifesto.setup()
+      // 
+      var resizeDebounce = eina.debounce( jm.manifesto.setup, jm.manifesto.scroll.next )
+      bean.on( window, 'resize', resizeDebounce )
+      
+      // Pause on mousewheel
+      var mousewheelThrottle = eina.throttle( jm.manifesto.pause, 300, { trailing: false })
+      bean.on( jm.manifesto.m, 'DOMMouseScroll', mousewheelThrottle, false )  // Firefox
+      bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )      // all others
+      // Resume after timeout
+      var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.scroll.next )
+      bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )  // Firefox
+      bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )      // all others
+    },
+    
+    setup: function()
+    {
+      jm.manifesto.pause()
+      
       for( var i = 0; i < jm.manifesto.a.length; i++ )
         jm.manifesto.o[ jm.manifesto.a[i].id ] = eina.offset( jm.manifesto.a[i] )
       
@@ -61,7 +64,7 @@ var jm = {
       
       next: function()
       {
-        var c = jm.manifesto.get.curr()
+        var c = jm.manifesto.get.curr() || jm.manifesto.get.first()
         return c.nextElementSibling || jm.manifesto.get.first()
       }
       
