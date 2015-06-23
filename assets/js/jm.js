@@ -3,12 +3,30 @@ var jm = {
   init: function()
   {
     jm.manifesto.init()
+    
+    var mousewheelThrottle = eina.throttle( jm.events.mousewheel, 300, { trailing: false })
+    bean.on( jm.manifesto.m, 'DOMMouseScroll', mousewheelThrottle, false )  // Firefox
+    bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )      // all others
+    var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.scroll.next )
+    bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )  // Firefox
+    bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )      // all others
+  },
+  
+  events: {
+    
+    mousewheel: function( _e )
+    {
+      jm.manifesto.pause()
+    }
+    
   },
   
   manifesto: {
     
     scroll: {
-      speed: 100,
+      next: 2000,
+      timeout: 10000,
+      speed: 150,
       easing: 'easeOutCubic'
     },
     m: document.getElementById('manifesto'),
@@ -54,7 +72,7 @@ var jm = {
       jm.manifesto.s = setInterval(function(){
         var n = '#'+ jm.manifesto.get.next().id
         smoothScroll.animateScroll( null, n, { speed: jm.manifesto.scroll.speed, easing: jm.manifesto.scroll.easing })
-      }, 2000)
+      }, jm.manifesto.scroll.next)
     },
     
     pause: function()
