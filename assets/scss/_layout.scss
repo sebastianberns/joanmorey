@@ -58,13 +58,15 @@
 
 .invisible { visibility: hidden; opacity: 0 }
 
-.wauto { width: auto }
-.w100p { width: 100% }
-.w50p  { width:  50% }
+.wauto  { width: auto   }
+.w100p  { width: 100%   }
+.w50p   { width:  50%   }
+.w100vh { width: 100vh  }
 
-.hauto { height: auto }
-.h100p { height: 100% }
-.h50p  { height:  50% }
+.hauto  { height: auto  }
+.h100p  { height: 100%  }
+.h50p   { height:  50%  }
+.h100vh { height: 100vh }
 
 .fit      { max-width:  100% }
 .vfit     { max-height: 100% }
