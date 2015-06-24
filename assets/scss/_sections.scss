@@ -5,35 +5,80 @@
   @include transition-timing-function( ease-in-out );
 }
 
-[data-section="info"] {
-  #manifesto {
-    @include transform( scale( .2 ) );
+[data-section="info"] #manifesto { 
+  @extend .absolute;
+  @include transform( scale( .6 ) );
+  @media( min-width: $screen-sm-min ){ @include transform( scale( .4 ) ) }
+  @media( min-width: $screen-md-min ){ @include transform( scale( .2 ) ) }
+}
+
+#info-header {
+  height: 20vh;
+  margin-bottom: 70vh;
+  @media( min-width: $screen-sm-min ){ 
+    height: 30vh;
+    margin-bottom: 50vh;
   }
-  #info {
-    opacity: 1;
+  @media( min-width: $screen-md-min ){ 
+    height: 40vh;
+    margin-bottom: 10vh;
   }
 }
 
-
-
-#info {
-  opacity: 0;
-  @include transition( opacity .4s ease-in-out );
+.info-text-blocker {
+  width:  0;
+  height: 0;
+  @media( min-width: $screen-md-min ){
+    width:  10vw;
+    height: 10vh;
+  }
 }
 
-.info-text-left,
-.info-text-right {
-  @extend .pl2;
-  @extend .pr2;
+#info-text-left,
+#info-text-right {
+  @extend .pl12;
+  @extend .pr12;
 }
+
+#info-text-bio {
+  @extend .pl12;
+  @extend .pr12;
+}
+
 @media( min-width: $screen-sm-min ){
-  .info-text-left  { padding-left:  10vw }
-  .info-text-right { padding-right: 10vw }
+  #info-text {
+    text-align: justify;
+  }
+  
+  #info-text-left,
+  #info-text-right { 
+    width: 50vw;
+  }
+  
+  #info-text-bio {
+    padding: 0 24px;
+  }
+  
+  #info-text-left {
+    float: left;
+    padding: {
+      left:  10vw;
+      right: 16px;
+    }
+  }
+  #info-text-right { 
+    float: right;
+    padding: {
+      left:  16px;
+      right: 10vw;
+    }
+  }
 }
 @media( min-width: $screen-md-min ){
-  .info-text-left  { padding-left:  25vw }
-  .info-text-right { padding-right: 25vw }
+  #info-text-left  { padding-left:  20vw }
+  #info-text-right { padding-right: 20vw }
 }
+
 
 
 
