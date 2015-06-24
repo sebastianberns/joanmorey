@@ -79,7 +79,7 @@ var jm = {
     {
       jm.manifesto.s = setInterval(function(){
         var n = '#'+ jm.manifesto.get.next().id
-        smoothScroll.animateScroll( null, n, jm.manifesto.config.scroll )
+//        smoothScroll.animateScroll( null, n, jm.manifesto.config.scroll )
       }, jm.manifesto.config.next)
     },
     
