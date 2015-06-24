@@ -5,15 +5,39 @@
   @include transition-timing-function( ease-in-out );
 }
 
-.manifesto-bg {
+[data-section="info"] {
+  #manifesto {
+    @include transform( scale( .2 ) );
+  }
+  #info {
+    opacity: 1;
+  }
+}
+
+
+
+#info {
+  opacity: 0;
   @include transition( opacity .4s ease-in-out );
 }
 
-[data-section="info"] {
-  #manifesto {
-    @include transform( scale( .9 ) );
-  }
-  .manifesto-bg {
-    opacity: .15;
-  }
+.info-text-left,
+.info-text-right {
+  @extend .pl2;
+  @extend .pr2;
+}
+@media( min-width: $screen-sm-min ){
+  .info-text-left  { padding-left:  10vw }
+  .info-text-right { padding-right: 10vw }
+}
+@media( min-width: $screen-md-min ){
+  .info-text-left  { padding-left:  25vw }
+  .info-text-right { padding-right: 25vw }
+}
+
+
+
+#bl {
+  width: 120px;
+  margin-left: -60px;
 }

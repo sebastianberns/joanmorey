@@ -60,13 +60,14 @@
 
 .wauto  { width: auto   }
 .w100p  { width: 100%   }
-.w50p   { width:  50%   }
 .w100vh { width: 100vh  }
+.w50p   { width:  50%   }
 
 .hauto  { height: auto  }
 .h100p  { height: 100%  }
-.h50p   { height:  50%  }
 .h100vh { height: 100vh }
+.h50p   { height:  50%  }
+.h50vh  { height:  50vh }
 
 .fit      { max-width:  100% }
 .vfit     { max-height: 100% }
@@ -86,7 +87,7 @@
 .clearfix { @include clearfix }
 
 $mp-min: 0;
-$mp-max: 10;
+$mp-max: 20;
 @mixin margins-paddings( $_b ){
   @for $i from $mp-min through $mp-max {
     .m#{$i}, .mt#{$i} { margin-top:     $i * $_b; }

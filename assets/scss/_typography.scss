@@ -1,16 +1,11 @@
 html {
-  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-  font-size: 16px;
-  line-height: normal;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.3em;
   font-feature-settings: "kern" 1;
 }
 
-.serif {
-  font-family: 'URWGaramondTW01-Regular', Garamond, "Times New Roman", Times, serif;
-  i, .i {
-    font-family: 'URWGaramondTW01-Italic', Garamond, "Times New Roman", Times, serif;
-  }
-}
+.small { font-size: .8em }
 
 a,
 .no-deco { text-decoration: none }
@@ -46,6 +41,7 @@ b, strong,
 .align-left    { text-align: left }
 .align-center  { text-align: center }
 .align-right   { text-align: right }
+.align-block   { text-align: justify }
 
 .valign-top    { vertical-align: top }
 .valign-middle { vertical-align: middle }
