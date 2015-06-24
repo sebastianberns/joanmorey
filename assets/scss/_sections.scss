@@ -1,7 +1,9 @@
 [data-section="info"] {
   #manifesto {
-    opacity: .25;
     @include transform( scale( .9 ) );
     @include transform-origin( center center );
+  }
+  .manifesto-bg {
+    opacity: .15;
   }
 }
