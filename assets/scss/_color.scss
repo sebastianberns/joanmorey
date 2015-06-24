@@ -2,8 +2,13 @@ a { color: inherit }
 
 .transparent { color: transparent }
 
-.cl-black { color: #000 }
+body,
+.cl-eee   { color: #eee }
 .cl-white { color: #fff }
+.cl-black { color: #000 }
 
+body,
+.bg-333   { background-color: #333 }
 .bg-white { background-color: #fff }
 .bg-black { background-color: #000 }
+
