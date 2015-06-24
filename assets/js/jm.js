@@ -7,11 +7,14 @@ var jm = {
   
   manifesto: {
     
-    scroll: {
+    config: {
       next: 2000,
       timeout: 10000,
-      speed: 150,
-      easing: 'easeOutCubic'
+      scroll: {
+        speed: 150,
+        easing: 'easeOutCubic',
+        updateURL: false
+      }
     },
     m: document.getElementById('manifesto'),
     a: document.querySelectorAll('#manifesto article'),
@@ -76,7 +79,7 @@ var jm = {
     {
       jm.manifesto.s = setInterval(function(){
         var n = '#'+ jm.manifesto.get.next().id
-        smoothScroll.animateScroll( null, n, { speed: jm.manifesto.scroll.speed, easing: jm.manifesto.scroll.easing })
+        smoothScroll.animateScroll( null, n, jm.manifesto.config.scroll )
       }, jm.manifesto.scroll.next)
     },
     
