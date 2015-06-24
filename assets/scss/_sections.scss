@@ -1,7 +1,17 @@
+#manifesto {
+  @include transform-origin( center center );
+  @include transition-property( transform );
+  @include transition-duration( .4s );
+  @include transition-timing-function( ease-in-out );
+}
+
+.manifesto-bg {
+  @include transition( opacity .4s ease-in-out );
+}
+
 [data-section="info"] {
   #manifesto {
     @include transform( scale( .9 ) );
-    @include transform-origin( center center );
   }
   .manifesto-bg {
     opacity: .15;
