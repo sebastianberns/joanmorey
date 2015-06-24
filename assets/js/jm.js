@@ -21,6 +21,8 @@ var jm = {
     var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
     bean.on( window, 'resize', resizeDebounce )
     
+    bean.on( jm.m, 'click', jm.toggle )
+    
     // Pause on mousewheel
     var mousewheelThrottle = eina.throttle( jm.pause, 300, { trailing: false })
     bean.on( jm.m, 'DOMMouseScroll', mousewheelThrottle, false ) // Firefox
@@ -79,6 +81,14 @@ var jm = {
   pause: function()
   {
     clearInterval( jm.s )
+  },
+  
+  toggle: function()
+  {
+    if( document.documentElement.hasAttribute('data-section') )
+      document.documentElement.removeAttribute('data-section')
+    else
+      document.documentElement.setAttribute('data-section', 'info')
   }
   
 }
