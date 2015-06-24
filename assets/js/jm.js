@@ -25,7 +25,7 @@ var jm = {
     {
       jm.manifesto.setup()
       // 
-      var resizeDebounce = eina.debounce( jm.manifesto.setup, jm.manifesto.scroll.next )
+      var resizeDebounce = eina.debounce( jm.manifesto.setup, jm.manifesto.config.next )
       bean.on( window, 'resize', resizeDebounce )
       
       // Pause on mousewheel
@@ -34,7 +34,7 @@ var jm = {
       bean.on( jm.manifesto.m, 'mousewheel', mousewheelThrottle, false )     // all others
       bean.on( jm.manifesto.m, 'touchmove', jm.manifesto.pause, false )      // Touch
       // Resume after timeout
-      var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.scroll.next )
+      var scrollTimeout = eina.debounce( jm.manifesto.play, jm.manifesto.config.next )
       bean.on( jm.manifesto.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
       bean.on( jm.manifesto.m, 'mousewheel', scrollTimeout, false )          // all others
       bean.on( jm.manifesto.m, 'touchmove', scrollTimeout, false )           // Touch  
@@ -61,7 +61,7 @@ var jm = {
       {
         var h = parseInt( eina.vp().h / 2 )
         for( var i = 0; i < jm.manifesto.a.length; i++ ){
-          if( jm.manifesto.o[ jm.manifesto.a[i].id ].t + h >= window.scrollY ) 
+          if( jm.manifesto.o[ jm.manifesto.a[i].id ].t + h >= jm.manifesto.m.scrollTop ) 
             return jm.manifesto.a[i]
         }
         return null
@@ -80,7 +80,7 @@ var jm = {
       jm.manifesto.s = setInterval(function(){
         var n = '#'+ jm.manifesto.get.next().id
         smoothScroll.animateScroll( null, n, jm.manifesto.config.scroll )
-      }, jm.manifesto.scroll.next)
+      }, jm.manifesto.config.next)
     },
     
     pause: function()
