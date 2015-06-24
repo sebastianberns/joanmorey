@@ -21,7 +21,7 @@ var jm = {
     var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
     bean.on( window, 'resize', resizeDebounce )
     
-    bean.on( jm.m, 'click', jm.toggle )
+    bean.on( document.documentElement, 'click', window.parent.toggle )
     
     // Pause on mousewheel
     var mousewheelThrottle = eina.throttle( jm.pause, 300, { trailing: false })
@@ -33,6 +33,8 @@ var jm = {
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
+    
+    console.log( window.parent.document.documentElement )
   },
   
   setup: function()
@@ -56,7 +58,7 @@ var jm = {
     {
       var h = parseInt( eina.vp().h / 2 )
       for( var i = 0; i < jm.a.length; i++ ){
-        if( jm.o[ jm.a[i].id ].t + h >= jm.m.scrollTop ) 
+        if( jm.o[ jm.a[i].id ].t + h >= window.scrollY ) 
           return jm.a[i]
       }
       return null
@@ -74,21 +76,13 @@ var jm = {
   {
     jm.s = setInterval(function(){
       var n = '#'+ jm.get.next().id
-//        smoothScroll.animateScroll( null, n, jm.config.scroll )
+        smoothScroll.animateScroll( null, n, jm.config.scroll )
     }, jm.config.next)
   },
   
   pause: function()
   {
     clearInterval( jm.s )
-  },
-  
-  toggle: function()
-  {
-    if( document.documentElement.hasAttribute('data-section') )
-      document.documentElement.removeAttribute('data-section')
-    else
-      document.documentElement.setAttribute('data-section', 'info')
   }
   
 }
