@@ -1,12 +1,7 @@
 [data-section="info"] {
-  #manifesto article {
-    border: {
-      left: solid 10px #fff;
-      right: solid 10px #fff;
-    }
-    svg {
-      @include transform( scale( .9 ) );
-      @include transform-origin( center center );
-    }
+  #manifesto {
+    opacity: .25;
+    @include transform( scale( .9 ) );
+    @include transform-origin( center center );
   }
 }
