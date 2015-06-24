@@ -1,8 +1,15 @@
 html {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
   font-size: 16px;
   line-height: normal;
   font-feature-settings: "kern" 1;
+}
+
+.serif {
+  font-family: 'URWGaramondTW01-Regular', Garamond, "Times New Roman", Times, serif;
+  i, .i {
+    font-family: 'URWGaramondTW01-Italic', Garamond, "Times New Roman", Times, serif;
+  }
 }
 
 a,
