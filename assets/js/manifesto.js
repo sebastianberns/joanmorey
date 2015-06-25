@@ -33,18 +33,35 @@ var jm = {
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
-    
-    console.log( window.parent.document.documentElement )
   },
   
   setup: function()
   {
+    if( /iPhone|iPod|iPad/.test( navigator.userAgent ) )
+      jm.fixIOS()
+    
     jm.pause()
     
     for( var i = 0; i < jm.a.length; i++ )
       jm.o[ jm.a[i].id ] = eina.offset( jm.a[i] )
     
     jm.play()
+  },
+  
+  fixIOS: function()
+  {
+    var vp = window.parent.eina.vp()
+    console.log( 'fixIOS', eina.vp(), window.parent.eina.vp() )
+    
+    document.documentElement.style.width  = vp.w +'px'
+    document.documentElement.style.height = vp.h +'px'
+    document.body.style.width  = vp.w +'px'
+    document.body.style.height = vp.h +'px'
+    jm.m.style.width  = vp.w +'px'
+    jm.m.style.height = vp.h +'px'
+    for( var i = 0; i < jm.a.length; i++ ){
+      jm.a[i].style.height = vp.h +'px'
+    }
   },
   
   get: {

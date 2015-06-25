@@ -1,4 +1,6 @@
 #i-manifesto {
+  @extend .fixed;
+  -webkit-overflow-scrolling: touch;
   @include transform-origin( center center );
   @include transition-property( transform );
   @include transition-duration( .4s );
@@ -10,6 +12,10 @@
   @include transform( scale( .6 ) );
   @media( min-width: $screen-sm-min ){ @include transform( scale( .4 ) ) }
   @media( min-width: $screen-md-min ){ @include transform( scale( .2 ) ) }
+}
+
+iframe {
+  border: none;
 }
 
 #info-header {
