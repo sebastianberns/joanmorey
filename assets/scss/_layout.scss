@@ -87,7 +87,7 @@
 .clearfix { @include clearfix }
 
 $mp-min: 0;
-$mp-max: 12;
+$mp-max: 20;
 @mixin margins-paddings( $_b ){
   @for $i from $mp-min through $mp-max {
     .m#{$i}, .mt#{$i} { margin-top:     $i * $_b; }
