@@ -33,35 +33,18 @@ var jm = {
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
+    
+    bean.on( jm.m, 'click', jm.toggle)
   },
   
   setup: function()
   {
-    if( /iPhone|iPod|iPad/.test( navigator.userAgent ) )
-      jm.fixIOS()
-    
     jm.pause()
     
     for( var i = 0; i < jm.a.length; i++ )
       jm.o[ jm.a[i].id ] = eina.offset( jm.a[i] )
     
     jm.play()
-  },
-  
-  fixIOS: function()
-  {
-    var vp = window.parent.eina.vp()
-    console.log( 'fixIOS', eina.vp(), window.parent.eina.vp() )
-    
-    document.documentElement.style.width  = vp.w +'px'
-    document.documentElement.style.height = vp.h +'px'
-    document.body.style.width  = vp.w +'px'
-    document.body.style.height = vp.h +'px'
-    jm.m.style.width  = vp.w +'px'
-    jm.m.style.height = vp.h +'px'
-    for( var i = 0; i < jm.a.length; i++ ){
-      jm.a[i].style.height = vp.h +'px'
-    }
   },
   
   get: {
@@ -93,13 +76,21 @@ var jm = {
   {
     jm.s = setInterval(function(){
       var n = '#'+ jm.get.next().id
-        smoothScroll.animateScroll( null, n, jm.config.scroll )
+//        smoothScroll.animateScroll( null, n, jm.config.scroll )
     }, jm.config.next)
   },
   
   pause: function()
   {
     clearInterval( jm.s )
+  },
+  
+  toggle: function()
+  {
+    if( document.documentElement.hasAttribute('data-section') )
+      document.documentElement.removeAttribute('data-section')
+    else
+      document.documentElement.setAttribute('data-section', 'info')
   }
   
 }
