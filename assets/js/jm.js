@@ -16,7 +16,7 @@ var jm = {
     var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
     bean.on( window, 'resize', resizeDebounce )
     
-    bean.on( jm.m, 'click', jm.toggle)
+    bean.on( jm.m, 'click', jm.toggle )
     
     // Pause on mousewheel
     var mousewheelThrottle = eina.throttle( jm.pause, 300, { trailing: false })
