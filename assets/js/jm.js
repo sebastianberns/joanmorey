@@ -16,7 +16,7 @@ var jm = {
     var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
     bean.on( window, 'resize', resizeDebounce )
     
-    bean.on( document.documentElement, 'click', window.parent.toggle )
+    bean.on( jm.m, 'click', jm.toggle)
     
     // Pause on mousewheel
     var mousewheelThrottle = eina.throttle( jm.pause, 300, { trailing: false })
@@ -28,8 +28,6 @@ var jm = {
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
-    
-    bean.on( jm.m, 'click', jm.toggle)
   },
   
   setup: function()
