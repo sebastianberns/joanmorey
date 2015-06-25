@@ -2,13 +2,14 @@
   @extend .fixed;
   @include transform-origin( center center );
   @include transition-property( transform );
-  @include transition-duration( .4s );
-  @include transition-timing-function( ease-in-out );
+  @include transition-duration( .3s );
+  @include transition-timing-function( $ease-in-quad );
 }
 
 [data-section="info"] #manifesto { 
   @extend .absolute;
   @include transform( scale( .6 ) );
+  @include transition-timing-function( $ease-out-quad );
   @media( min-width: $screen-sm-min ){ @include transform( scale( .4 ) ) }
   @media( min-width: $screen-md-min ){ @include transform( scale( .2 ) ) }
 }
