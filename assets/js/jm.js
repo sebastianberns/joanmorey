@@ -11,8 +11,11 @@ var jm = {
   
   init: function()
   {
+    window.scrollTo(0, 100)
+    jm.m.scrollTop = 1
+    
     jm.setup()
-    // 
+    
     var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
     bean.on( window, 'resize', resizeDebounce )
     
@@ -119,7 +122,7 @@ var jm = {
     end: function()
     {
       jm.pause()
-      jm.m.scrollTop = document.getElementById('manifesto-end').offsetTop - 1
+      jm.m.scrollTop = document.getElementById('manifesto-end').offsetTop
       jm.play()
     }
     

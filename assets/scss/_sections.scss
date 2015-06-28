@@ -4,6 +4,7 @@
   @include transition-property( transform );
   @include transition-duration( .3s );
   @include transition-timing-function( $ease-in-quad );
+  padding-top: 1px;
 }
 
 [data-section="info"] #manifesto { 
