@@ -60,8 +60,7 @@ var jm = {
     
     next: function()
     {
-      var c = jm.get.curr()
-      return c.nextElementSibling
+      return jm.get.curr().nextElementSibling
     }
     
   },
@@ -69,37 +68,29 @@ var jm = {
   play: function()
   {
     jm.s = setInterval(function(){
-      var n = jm.get.next()
-      if( n )
-        jm.scroll( n, jm.config.scroll )
-      else {
-        jm.jump.start()
-        jm.scroll( jm.get.next(), jm.config.scroll )
-      }
+      jm.scroll( jm.get.next() )
     }, jm.config.next)
   },
   
   pause: function()
   {
     clearInterval( jm.s )
-    clearInterval( jm.t )
+    if( jm.t )
+      jm.t.stop()
   },
   
-  scroll: function( elem, time )
-  // http://stackoverflow.com/questions/26093394/smooth-scroll-into-view-vanilla-javascript
+  scroll: function( _e )
   {
-    if( !elem ) return
-    var to = elem.offsetTop
-    var from = jm.m.scrollTop
-    var start = new Date().getTime()
-    
-    jm.t = setInterval(function() {
-        var step = Math.min( 1, ( new Date().getTime() - start ) / time )
-        jm.m.scrollTop = ( from + step * ( to - from ) ) + 1
-        if( step == 1 )
-          clearInterval( jm.t )
-    }, 25 )
-    jm.m.scrollTop = from + 1
+    if( _e ){
+      jm.t = morpheus.tween(
+        jm.config.scroll,                              // duration
+        function animate( _y ){ jm.m.scrollTop = _y }, // animation function
+        null,                                          // callback on complete
+        function linear( _t ){ return _t },            // easing function
+        jm.m.scrollTop,                                // start int
+        _e.offsetTop                                   // end int
+      )
+    }
   },
   
   loop: function( _e )
