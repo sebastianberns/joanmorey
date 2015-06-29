@@ -1,9 +1,10 @@
 var jm = {
   
   config: {
+    resize: 300,
+    scroll: 150,
     next: 2000,
-    timeout: 10000,
-    scroll: 150
+    resume: 6000
   },
   m: document.getElementById('manifesto'),
   a: document.querySelectorAll('#manifesto article'),
@@ -16,7 +17,7 @@ var jm = {
     
     jm.setup()
     
-    var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
+    var resizeDebounce = eina.debounce( jm.setup, jm.config.resize )
     bean.on( window, 'resize', resizeDebounce )
     
     bean.on( jm.m, 'click', jm.toggle )
@@ -27,7 +28,7 @@ var jm = {
     bean.on( jm.m, 'mousewheel', mousewheelThrottle, false )     // all others
     bean.on( jm.m, 'touchmove', jm.pause, false )      // Touch
     // Resume after timeout
-    var scrollTimeout = eina.debounce( jm.play, jm.config.next )
+    var scrollTimeout = eina.debounce( jm.play, jm.config.resume )
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
