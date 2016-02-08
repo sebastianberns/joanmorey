@@ -13,7 +13,7 @@ var jm = {
   init: function()
   {
     window.scrollTo(0, 100)
-    jm.m.scrollTop = 1
+    jm.m.scrollTop = 0
     
     jm.setup()
     
