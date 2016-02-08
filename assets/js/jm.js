@@ -1,19 +1,23 @@
 var jm = {
   
   config: {
+    resize: 300,
+    scroll: 150,
     next: 2000,
-    timeout: 10000,
-    scroll: 150
+    resume: 6000
   },
   m: document.getElementById('manifesto'),
   a: document.querySelectorAll('#manifesto article'),
-  s: false,
+  s: false, t: false,
   
   init: function()
   {
+    window.scrollTo(0, 100)
+    jm.m.scrollTop = 0
+    
     jm.setup()
-    // 
-    var resizeDebounce = eina.debounce( jm.setup, jm.config.next )
+    
+    var resizeDebounce = eina.debounce( jm.setup, jm.config.resize )
     bean.on( window, 'resize', resizeDebounce )
     
     bean.on( jm.m, 'click', jm.toggle )
@@ -24,10 +28,12 @@ var jm = {
     bean.on( jm.m, 'mousewheel', mousewheelThrottle, false )     // all others
     bean.on( jm.m, 'touchmove', jm.pause, false )      // Touch
     // Resume after timeout
-    var scrollTimeout = eina.debounce( jm.play, jm.config.next )
+    var scrollTimeout = eina.debounce( jm.play, jm.config.resume )
     bean.on( jm.m, 'DOMMouseScroll', scrollTimeout, false )      // Firefox
     bean.on( jm.m, 'mousewheel', scrollTimeout, false )          // all others
     bean.on( jm.m, 'touchmove', scrollTimeout, false )           // Touch  
+    
+    bean.on( jm.m, 'scroll', jm.loop )
   },
   
   setup: function()
@@ -55,8 +61,7 @@ var jm = {
     
     next: function()
     {
-      var c = jm.get.curr() || jm.get.first()
-      return c.nextElementSibling || jm.get.first()
+      return jm.get.curr().nextElementSibling
     }
     
   },
@@ -64,31 +69,55 @@ var jm = {
   play: function()
   {
     jm.s = setInterval(function(){
-      jm.scroll( jm.get.next(), jm.config.scroll )
+      jm.scroll( jm.get.next() )
     }, jm.config.next)
   },
   
   pause: function()
   {
     clearInterval( jm.s )
+    if( jm.t )
+      jm.t.stop()
   },
   
-  scroll: function( elem, time )
-  // http://stackoverflow.com/questions/26093394/smooth-scroll-into-view-vanilla-javascript
+  scroll: function( _e )
   {
-    if( !elem ) return
-    var to = elem.offsetTop
-    var from = jm.m.scrollTop
-    var start = new Date().getTime(),
-        timer 
+    if( _e ){
+      jm.t = morpheus.tween(
+        jm.config.scroll,                              // duration
+        function animate( _y ){ jm.m.scrollTop = _y }, // animation function
+        null,                                          // callback on complete
+        function linear( _t ){ return _t },            // easing function
+        jm.m.scrollTop,                                // start int
+        _e.offsetTop                                   // end int
+      )
+    }
+  },
+  
+  loop: function( _e )
+  {
+    if( jm.m.scrollTop >= document.getElementById('manifesto-end').offsetTop )
+      jm.jump.start()
+    else if( jm.m.scrollTop <= 0 )
+      jm.jump.end()
+  },
+  
+  jump: {
     
-    timer = setInterval(function() {
-        var step = Math.min( 1, ( new Date().getTime() - start ) / time )
-        jm.m.scrollTop = ( from + step * ( to - from ) ) + 1
-        if( step == 1 )
-          clearInterval( timer )
-    }, 25 )
-    jm.m.scrollTop = from + 1
+    start: function()
+    {
+      jm.pause()
+      jm.m.scrollTop = 1
+      jm.play()
+    },
+    
+    end: function()
+    {
+      jm.pause()
+      jm.m.scrollTop = document.getElementById('manifesto-end').offsetTop
+      jm.play()
+    }
+    
   },
   
   toggle: function()

@@ -4,6 +4,7 @@
   @include transition-property( transform );
   @include transition-duration( .3s );
   @include transition-timing-function( $ease-in-quad );
+  padding-top: 1px;
 }
 
 [data-section="info"] #manifesto { 
@@ -79,12 +80,4 @@
 @media( min-width: $screen-md-min ){
   #info-text-left  { padding-left:  20vw }
   #info-text-right { padding-right: 20vw }
-}
-
-
-
-
-#bl {
-  width: 120px;
-  margin-left: -60px;
 }
