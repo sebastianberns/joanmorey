@@ -38,12 +38,9 @@
 }
 
 #info-text-left,
-#info-text-right {
-  @extend .pl12;
-  @extend .pr12;
-}
-
-#info-text-bio {
+#info-text-right,
+#info-text-bio,
+#credits {
   @extend .pl12;
   @extend .pr12;
 }
@@ -58,7 +55,8 @@
     width: 50vw;
   }
   
-  #info-text-bio {
+  #info-text-bio,
+  #credits {
     padding: 0 24px;
   }
   
